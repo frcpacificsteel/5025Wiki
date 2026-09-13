@@ -7,6 +7,8 @@ import WikiLoader from './components/WikiLoader.vue'
 import MobileGlobalActions from './components/MobileGlobalActions.vue'
 import TechnicalDiagram from './components/TechnicalDiagram.vue'
 import BackToTop from './components/BackToTop.vue'
+import HomePage from './components/HomePage.vue'
+import ReadingProgress from './components/ReadingProgress.vue'
 import './custom.css'
 
 let routeAnimationTimer: number | undefined
@@ -38,12 +40,13 @@ const theme: Theme = {
   extends: DefaultTheme,
   Layout: () => h(DefaultTheme.Layout, null, {
     'sidebar-nav-before': () => h(MobileGlobalActions),
-    'layout-bottom': () => [h(WikiLoader), h(WikiAssistant), h(BackToTop)]
+    'layout-bottom': () => [h(WikiLoader), h(ReadingProgress), h(WikiAssistant), h(BackToTop)]
   }),
   enhanceApp({ app, router }) {
     app.component('SystemMap', SystemMap)
     app.component('WikiAssistant', WikiAssistant)
     app.component('TechnicalDiagram', TechnicalDiagram)
+    app.component('HomePage', HomePage)
 
     if (typeof window !== 'undefined') {
       window.addEventListener('wiki-loader-complete', animateRoute)
