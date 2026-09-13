@@ -40,6 +40,38 @@ const sources = {
     E --> F[Full-system validation]`
 } as const
 
+const connections: Partial<Record<typeof props.type, string[][]>> = {
+  'beginner-loop': [['A', 'B'], ['B', 'C'], ['C', 'D'], ['D', 'E'], ['E', 'F'], ['F', 'C'], ['C', 'G']],
+  pose: [['W', 'E'], ['G', 'E'], ['V', 'Q'], ['Q', 'E'], ['E', 'P']],
+  'test-layers': [['A', 'B'], ['B', 'C'], ['C', 'D'], ['D', 'E'], ['E', 'F']]
+}
+
+function wireNodeHover(root: HTMLElement, pairs: string[][]) {
+  const nodes = [...root.querySelectorAll<SVGGElement>('.node')]
+  const findNode = (key: string) => nodes.find((node) => node.id.includes(`-${key}-`))
+
+  nodes.forEach((node) => {
+    const key = pairs.flat().find((candidate) => node.id.includes(`-${candidate}-`))
+    if (!key) return
+
+    node.addEventListener('pointerenter', () => {
+      root.classList.add('has-node-focus')
+      node.classList.add('is-hovered')
+      const related = new Set(pairs.filter((pair) => pair.includes(key)).flat())
+      related.forEach((candidate) => findNode(candidate)?.classList.add('is-related'))
+      root.querySelectorAll<SVGPathElement>('path.flowchart-link').forEach((edge) => {
+        if (edge.id.includes(`_${key}_`)) edge.classList.add('is-related-edge')
+      })
+    })
+
+    node.addEventListener('pointerleave', () => {
+      root.classList.remove('has-node-focus')
+      nodes.forEach((candidate) => candidate.classList.remove('is-hovered', 'is-related'))
+      root.querySelectorAll('path.flowchart-link').forEach((edge) => edge.classList.remove('is-related-edge'))
+    })
+  })
+}
+
 const diagram = ref<HTMLElement | null>(null)
 const error = ref(false)
 let observer: MutationObserver | undefined
@@ -63,7 +95,10 @@ async function render() {
 
   try {
     const { svg } = await mermaid.render(`technical-diagram-${props.type}-${current}`, sources[props.type])
-    if (current === version && diagram.value) diagram.value.innerHTML = svg
+    if (current === version && diagram.value) {
+      diagram.value.innerHTML = svg
+      wireNodeHover(diagram.value, connections[props.type] ?? [])
+    }
     error.value = false
   } catch {
     if (current === version) error.value = true

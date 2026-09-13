@@ -49,6 +49,38 @@ const compactSource = String.raw`flowchart TB
   class Telemetry evidence
   class Electrical foundation`
 
+const connections = [
+  ['Controls', 'Decision'], ['Vision', 'Decision'], ['Decision', 'Drivetrain'],
+  ['Decision', 'Mechanisms'], ['Drivetrain', 'Telemetry'], ['Mechanisms', 'Telemetry'],
+  ['Telemetry', 'Decision'], ['Electrical', 'Decision']
+]
+
+function wireNodeHover(root: HTMLElement) {
+  const nodes = [...root.querySelectorAll<SVGGElement>('.node')]
+  const findNode = (key: string) => nodes.find((node) => node.id.includes(`-${key}-`))
+
+  nodes.forEach((node) => {
+    const key = connections.flat().find((candidate) => node.id.includes(`-${candidate}-`))
+    if (!key) return
+
+    node.addEventListener('pointerenter', () => {
+      root.classList.add('has-node-focus')
+      node.classList.add('is-hovered')
+      const related = new Set(connections.filter((pair) => pair.includes(key)).flat())
+      related.forEach((candidate) => findNode(candidate)?.classList.add('is-related'))
+      root.querySelectorAll<SVGPathElement>('path.flowchart-link').forEach((edge) => {
+        if (edge.id.includes(`_${key}_`)) edge.classList.add('is-related-edge')
+      })
+    })
+
+    node.addEventListener('pointerleave', () => {
+      root.classList.remove('has-node-focus')
+      nodes.forEach((candidate) => candidate.classList.remove('is-hovered', 'is-related'))
+      root.querySelectorAll('path.flowchart-link').forEach((edge) => edge.classList.remove('is-related-edge'))
+    })
+  })
+}
+
 async function render() {
   if (!diagram.value) return
 
@@ -99,6 +131,7 @@ async function render() {
     const { svg } = await mermaid.render(`robot-system-map-${version}`, `${diagramSource}\n${palette}`)
     if (version !== renderVersion || !diagram.value) return
     diagram.value.innerHTML = svg
+    wireNodeHover(diagram.value)
     error.value = false
   } catch {
     if (version === renderVersion) error.value = true

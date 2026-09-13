@@ -34,6 +34,8 @@
   --vp-sidebar-bg-color: var(--ps-sidebar);
   --vp-nav-logo-height: 32px;
   --vp-layout-max-width: 1480px;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--vp-nav-height) + 24px);
 }
 
 .dark {
@@ -143,6 +145,78 @@ h4,
   object-position: left center;
 }
 
+.VPNavBarMenuLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.VPNavBarMenuLink::before {
+  display: block;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  background: currentColor;
+  content: '';
+  opacity: 0.72;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+}
+
+.VPNavBarMenuLink[href='/systems/']::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 3h8v8H3V3Zm10 0h8v8h-8V3ZM3 13h8v8H3v-8Zm10 0h8v8h-8v-8Z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 3h8v8H3V3Zm10 0h8v8h-8V3ZM3 13h8v8H3v-8Zm10 0h8v8h-8v-8Z'/%3E%3C/svg%3E");
+}
+
+.VPNavBarMenuLink[href='/start/new-programmers']::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm0 2v14h16V5H4Zm3.3 3.3L11 12l-3.7 3.7-1.4-1.4L8.2 12 5.9 9.7l1.4-1.4ZM12 15h5v2h-5v-2Z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm0 2v14h16V5H4Zm3.3 3.3L11 12l-3.7 3.7-1.4-1.4L8.2 12 5.9 9.7l1.4-1.4ZM12 15h5v2h-5v-2Z'/%3E%3C/svg%3E");
+}
+
+.VPNavBarMenuLink[href='/start/report-a-problem']::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm-1 11h2v2h-2v-2Zm0-8h2v6h-2V7Z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm-1 11h2v2h-2v-2Zm0-8h2v6h-2V7Z'/%3E%3C/svg%3E");
+}
+
+.vp-doc [class*='language-'] > button.copy {
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='rgba(128,128,128,1)' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.75' viewBox='0 0 24 24'%3E%3Crect x='8' y='8' width='11' height='11' rx='2'/%3E%3Cpath d='M16 8V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h1'/%3E%3C/svg%3E");
+  background-size: 16px;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    opacity 180ms ease,
+    transform 140ms var(--ps-magnetic);
+}
+
+.vp-doc [class*='language-'] > button.copy:active {
+  transform: scale(0.94);
+}
+
+.vp-doc [class*='language-'] > button.copy.copied,
+.vp-doc [class*='language-'] > button.copy:hover.copied {
+  border-radius: 0 5px 5px 0;
+}
+
+.vp-doc [class*='language-'] > button.copy.copied::before,
+.vp-doc [class*='language-'] > button.copy:hover.copied::before {
+  height: 32px;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .vp-doc [class*='language-'] > button.copy {
+    opacity: 0.72;
+  }
+}
+
 .wiki-mobile-actions {
   display: none;
 }
@@ -192,6 +266,53 @@ h4,
 .wiki-route-enter .wiki-route-chunk {
   animation: wiki-chunk-enter var(--ps-route-duration) var(--ps-magnetic) both;
   animation-delay: calc(var(--wiki-chunk-index, 0) * var(--ps-route-stagger));
+}
+
+.wiki-initial-loading .VPNav,
+.wiki-initial-loading .VPSidebar,
+.wiki-initial-loading .VPDoc .vp-doc > div > *,
+.wiki-initial-loading .VPHome {
+  opacity: 0;
+}
+
+.wiki-initial-reveal .VPNav {
+  animation: wiki-nav-enter 520ms var(--ps-magnetic) both;
+}
+
+.wiki-initial-reveal .VPHome {
+  animation: wiki-chunk-enter 720ms 100ms var(--ps-magnetic) both;
+}
+
+@media (min-width: 960px) {
+  .wiki-initial-reveal .VPSidebar {
+    animation: wiki-shell-enter 560ms 70ms var(--ps-magnetic) both;
+  }
+}
+
+@keyframes wiki-nav-enter {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translate3d(0, -10px, 0);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes wiki-shell-enter {
+  from {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translate3d(-8px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @keyframes wiki-chunk-enter {
@@ -329,6 +450,57 @@ h4,
   margin: 0;
   color: var(--vp-c-text-2);
   font-size: 0.78rem;
+}
+
+.system-map__diagram .node,
+.technical-diagram .node,
+.system-map__diagram path.flowchart-link,
+.technical-diagram path.flowchart-link {
+  transition:
+    opacity 220ms var(--ps-magnetic),
+    stroke 220ms ease,
+    stroke-width 220ms ease,
+    filter 220ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .system-map__diagram .node,
+  .technical-diagram .node {
+    cursor: default;
+  }
+
+  .system-map__diagram.has-node-focus .node,
+  .technical-diagram .has-node-focus .node {
+    opacity: 0.34;
+  }
+
+  .system-map__diagram.has-node-focus .node.is-related,
+  .system-map__diagram.has-node-focus .node.is-hovered,
+  .technical-diagram .has-node-focus .node.is-related,
+  .technical-diagram .has-node-focus .node.is-hovered {
+    opacity: 1;
+  }
+
+  .system-map__diagram .node.is-related > :is(rect, polygon, path),
+  .system-map__diagram .node.is-hovered > :is(rect, polygon, path),
+  .technical-diagram .node.is-related > :is(rect, polygon, path),
+  .technical-diagram .node.is-hovered > :is(rect, polygon, path) {
+    stroke: var(--vp-c-brand-2) !important;
+    stroke-width: 2px !important;
+    filter: drop-shadow(0 2px 3px rgba(1, 58, 91, 0.12)) !important;
+  }
+
+  .system-map__diagram.has-node-focus path.flowchart-link,
+  .technical-diagram .has-node-focus path.flowchart-link {
+    opacity: 0.2;
+  }
+
+  .system-map__diagram.has-node-focus path.flowchart-link.is-related-edge,
+  .technical-diagram .has-node-focus path.flowchart-link.is-related-edge {
+    opacity: 0.9;
+    stroke: var(--vp-c-brand-2) !important;
+    stroke-width: 2px !important;
+  }
 }
 
 @media (max-width: 760px) {
@@ -695,23 +867,54 @@ h4,
 .wiki-loader__shine {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    115deg,
-    transparent 16%,
-    rgba(255, 255, 255, 0.02) 27%,
-    rgba(255, 255, 255, 0.16) 37%,
-    rgba(255, 255, 255, 0.52) 45%,
-    rgba(255, 255, 255, 0.96) 50%,
-    rgba(255, 255, 255, 0.52) 55%,
-    rgba(255, 255, 255, 0.16) 63%,
-    rgba(255, 255, 255, 0.02) 73%,
-    transparent 84%
-  );
+  overflow: hidden;
   mask: url('/assets/logo-icon.svg') center / contain no-repeat;
   -webkit-mask: url('/assets/logo-icon.svg') center / contain no-repeat;
+}
+
+.wiki-loader__shine::before {
+  position: absolute;
+  inset: -3px;
+  content: '';
+  background: linear-gradient(
+    115deg,
+    transparent 8%,
+    rgba(255, 255, 255, 0.015) 20%,
+    rgba(255, 255, 255, 0.08) 31%,
+    rgba(255, 255, 255, 0.24) 40%,
+    rgba(255, 255, 255, 0.58) 48%,
+    rgba(255, 255, 255, 0.72) 50%,
+    rgba(255, 255, 255, 0.58) 52%,
+    rgba(255, 255, 255, 0.24) 60%,
+    rgba(255, 255, 255, 0.08) 69%,
+    rgba(255, 255, 255, 0.015) 80%,
+    transparent 92%
+  );
+  filter: blur(2.4px);
   transform: translate3d(-175%, 0, 0);
   animation: wiki-loader-shine 1300ms 420ms cubic-bezier(0.45, 0, 0.55, 1) both;
   will-change: transform;
+}
+
+.dark .wiki-loader__mark {
+  filter: grayscale(1) brightness(2.15) opacity(0.48);
+}
+
+.dark .wiki-loader__shine::before {
+  background: linear-gradient(
+    115deg,
+    transparent 8%,
+    rgba(255, 255, 255, 0.01) 20%,
+    rgba(255, 255, 255, 0.06) 31%,
+    rgba(255, 255, 255, 0.18) 40%,
+    rgba(255, 255, 255, 0.42) 48%,
+    rgba(255, 255, 255, 0.56) 50%,
+    rgba(255, 255, 255, 0.42) 52%,
+    rgba(255, 255, 255, 0.18) 60%,
+    rgba(255, 255, 255, 0.06) 69%,
+    rgba(255, 255, 255, 0.01) 80%,
+    transparent 92%
+  );
 }
 
 @keyframes wiki-loader-pop-in {
@@ -753,16 +956,204 @@ h4,
   transform: translate3d(0, 10px, 0) scale(0.94);
 }
 
+.VPLocalSearchBox .result {
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 160ms var(--ps-magnetic),
+    border-color 160ms ease,
+    background-color 160ms ease,
+    opacity 160ms ease;
+}
+
+.VPLocalSearchBox .result .titles,
+.VPLocalSearchBox .result .title-icon {
+  transition:
+    transform 160ms var(--ps-magnetic),
+    color 160ms ease;
+}
+
+.VPLocalSearchBox .result.selected {
+  transform: translate3d(3px, 0, 0);
+}
+
+.VPLocalSearchBox .result.selected .titles,
+.VPLocalSearchBox .result.selected .title-icon {
+  transform: translate3d(2px, 0, 0);
+}
+
+.outline-link {
+  transition:
+    color 160ms ease,
+    transform 160ms var(--ps-magnetic);
+}
+
+.outline-link.active {
+  transform: translate3d(2px, 0, 0);
+}
+
+.VPSidebarItem .caret-icon {
+  transition:
+    transform 220ms var(--ps-magnetic),
+    color 160ms ease !important;
+}
+
+.VPNavBarMenuLink::before {
+  transition:
+    opacity 160ms ease,
+    transform 160ms var(--ps-magnetic);
+}
+
+.vp-doc [class*='language-'] > button.copy.copied {
+  animation: wiki-copy-confirm 220ms var(--ps-magnetic);
+}
+
+.vp-doc :is(h2, h3):target {
+  animation: wiki-heading-arrival 900ms var(--ps-magnetic);
+}
+
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 78px;
+  z-index: calc(var(--ps-z-panel) - 1);
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  color: var(--vp-c-text-2);
+  background: var(--vp-c-bg);
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 140ms var(--ps-magnetic);
+}
+
+.back-to-top svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid var(--vp-c-brand-2);
+  outline-offset: 2px;
+}
+
+.back-to-top:active {
+  transform: scale(0.94);
+}
+
+.back-to-top-enter-active,
+.back-to-top-leave-active {
+  transition:
+    opacity 220ms var(--ps-magnetic),
+    transform 220ms var(--ps-magnetic),
+    filter 220ms var(--ps-magnetic);
+}
+
+.back-to-top-enter-from,
+.back-to-top-leave-to {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translate3d(0, 8px, 0) scale(0.94);
+}
+
+@keyframes wiki-copy-confirm {
+  0% { transform: scale(0.92); }
+  65% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wiki-heading-arrival {
+  0% { background-color: var(--vp-c-brand-soft); }
+  100% { background-color: transparent; }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .VPSidebarItem .link:hover .text {
     transform: translateX(2px);
   }
+
+  .VPNavBarMenuLink:hover::before {
+    opacity: 1;
+    transform: translate3d(0, -1px, 0);
+  }
+
+  .back-to-top:hover {
+    border-color: var(--vp-c-brand-2);
+    color: var(--vp-c-brand-1);
+    background: var(--vp-c-brand-soft);
+    transform: translate3d(0, -2px, 0);
+  }
+
+  :is(.vp-external-link-icon, .vp-doc a[href*='://'], .vp-doc a[target='_blank']):not(:is(.no-icon, svg a, :has(img, svg)))::after {
+    opacity: 0.52;
+    transform: translate3d(0, 0, 0);
+    transition:
+      opacity 160ms ease,
+      transform 180ms var(--ps-magnetic);
+  }
+
+  :is(.vp-external-link-icon, .vp-doc a[href*='://'], .vp-doc a[target='_blank']):not(:is(.no-icon, svg a, :has(img, svg))):hover::after {
+    opacity: 1;
+    transform: translate3d(2px, -2px, 0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+
+  .vp-doc [class*='language-'] > button.copy:active {
+    transform: none;
+  }
+
+  .vp-doc [class*='language-'] > button.copy.copied,
+  .vp-doc :is(h2, h3):target,
+  .back-to-top-enter-active,
+  .back-to-top-leave-active {
+    animation: none;
+    filter: none;
+    transform: none;
+    transition: opacity 120ms ease-out;
+  }
+
+  .VPLocalSearchBox .result,
+  .VPLocalSearchBox .result .titles,
+  .VPLocalSearchBox .result .title-icon,
+  .outline-link,
+  .VPNavBarMenuLink::before,
+  .VPSidebarItem .caret-icon,
+  .system-map__diagram .node,
+  .technical-diagram .node,
+  .system-map__diagram path.flowchart-link,
+  .technical-diagram path.flowchart-link {
+    transition: none !important;
+  }
+
   .wiki-route-enter .wiki-route-chunk {
     animation: wiki-chunk-fade 140ms ease-out both;
     animation-delay: 0ms;
+  }
+
+  .wiki-initial-reveal .VPNav,
+  .wiki-initial-reveal .VPHome {
+    animation: wiki-chunk-fade 140ms ease-out both;
+  }
+
+  @media (min-width: 960px) {
+    .wiki-initial-reveal .VPSidebar {
+      animation: wiki-chunk-fade 140ms ease-out both;
+    }
   }
 
   .VPSidebarItem .text,
@@ -786,7 +1177,7 @@ h4,
   }
 
   .wiki-loader__mark-shell,
-  .wiki-loader__shine {
+  .wiki-loader__shine::before {
     animation: none;
   }
 
@@ -828,6 +1219,11 @@ h4,
   .wiki-assistant-trigger {
     right: 16px;
     bottom: 14px;
+  }
+
+  .back-to-top {
+    right: 16px;
+    bottom: 72px;
   }
 
   .wiki-assistant {

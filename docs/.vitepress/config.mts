@@ -19,8 +19,8 @@ export default defineConfig({
     search: { provider: 'local' },
     nav: [
       { text: 'Systems', link: '/systems/' },
-      { text: 'Practice', link: '/practice/' },
-      { text: 'Reference', link: '/reference/safety' }
+      { text: 'New coders', link: '/start/new-programmers' },
+      { text: 'Report issue', link: '/start/report-a-problem' }
     ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/frcpacificsteel/5025Wiki', ariaLabel: 'Pacific Steel 5025 Wiki on GitHub' }
