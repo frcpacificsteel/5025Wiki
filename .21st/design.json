@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "project": {
+    "name": "5025Wiki",
+    "productType": "documentation knowledge base",
+    "stack": ["VitePress", "Vue", "TypeScript", "CSS"]
+  },
+  "sources": {
+    "tokens": [],
+    "components": [],
+    "assets": [],
+    "instructions": [
+      "PRODUCT.md",
+      "DESIGN.md"
+    ]
+  },
+  "design": {
+    "colorMode": "light",
+    "colors": {
+      "steelBlue": "#013A5B",
+      "pacificBlue": "#0283C2",
+      "red": "#C90109",
+      "gold": "#F8AD15"
+    },
+    "typography": {
+      "heading": "Encode Sans Semi Expanded",
+      "body": "Encode Sans"
+    },
+    "spacing": {
+      "readingWidth": "72ch"
+    },
+    "radius": {
+      "small": "6px",
+      "medium": "8px"
+    },
+    "shadows": {
+      "strategy": "flat by default; overlays only"
+    },
+    "motion": {
+      "signature": "720ms cubic-bezier(0, 0.9, 0, 1) with 65ms chunk stagger",
+      "ingredients": ["staggered position", "opacity", "blur"],
+      "reducedMotion": "crossfade or instant"
+    },
+    "density": "comfortable"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [
+      "Use persistent system-first sidebar navigation",
+      "Teach evergreen concepts before season-specific implementation",
+      "Use supplied brand colors and Encode Sans families",
+      "Meet WCAG 2.2 AA and support reduced motion"
+    ],
+    "avoid": [
+      "Generic SaaS dashboard patterns",
+      "Repetitive card grids",
+      "Decorative gradients and glass effects",
+      "Season-specific robot code as the primary knowledge structure",
+      "Decorative motion that competes with reading"
+    ]
+  },
+  "decisions": [
+    {
+      "decision": "Use a minimalist Notion-like workspace shell with VitePress behavior",
+      "reason": "The team selected a reading-first sidebar concept as the primary direction."
+    },
+    {
+      "decision": "Use cubic-bezier(0, 0.9, 0, 1) as the signature magnetic easing",
+      "reason": "The fast initial response and long settle create deliberate motion without delaying feedback."
+    },
+    {
+      "decision": "Reveal document content as offset chunks over 720ms with a 65ms stagger",
+      "reason": "The team requested a slower, sectional arrival while retaining the magnetic response curve."
+    },
+    {
+      "decision": "Render maintainable system diagrams with Mermaid.js",
+      "reason": "Text-based diagrams can be reviewed, versioned, and updated as evergreen team knowledge evolves."
+    },
+    {
+      "decision": "Use a Groq-backed assistant grounded in wiki pages",
+      "reason": "A server-side key boundary provides stronger answers on all team devices while the interface keeps citations and clearly labels generated guidance."
+    },
+    {
+      "decision": "Present assistant conversations as a compact reading panel rather than chat bubbles",
+      "reason": "The team selected a minimalist treatment where answers, citations, and the composer support the documentation instead of competing with it."
+    }
+  ],
+  "evidence": [
+    {
+      "fact": "project.instructions",
+      "source": "PRODUCT.md"
+    }
+  ],
+  "generatedAt": "2026-09-12T20:30:27.917Z"
+}

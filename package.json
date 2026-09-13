@@ -1,0 +1,17 @@
+{
+  "name": "5025-wiki",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@fontsource/encode-sans": "latest",
+    "@fontsource/encode-sans-semi-expanded": "latest",
+    "mermaid": "^11.17.2",
+    "vitepress": "latest",
+    "wrangler": "^4.131.1"
+  }
+}
