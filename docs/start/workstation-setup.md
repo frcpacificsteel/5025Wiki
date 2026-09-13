@@ -8,19 +8,23 @@ Use the WPILib release selected by the team. It includes the supported JDK, VS C
 
 ## Open and build the project
 
-Open the project folder itself, not its parent. In a terminal at the repository root:
+Open the project folder itself, not its parent, in the WPILib version of VS Code. Click the WPILib logo in the upper-right corner to open the WPILib Command Palette, then choose **Build Robot Code**.
 
-```powershell
-./gradlew.bat assemble
-```
+Wait for `BUILD SUCCESSFUL` in the terminal. Build the unchanged project before editing anything. If it fails now, the problem is in the workstation, dependencies, or repository state rather than your change.
 
-On macOS or Linux:
+You can also press `Ctrl+Shift+P`, type `WPILib`, and select **WPILib: Build Robot Code**. Use the WPILib commands throughout this guide instead of VS Code's generic Run button.
 
-```bash
-./gradlew assemble
-```
+## Commands used by the team
 
-The Gradle wrapper pins the build tooling used by the repository. A local Gradle installation is not required.
+| Task | WPILib VS Code command | Use it when |
+| --- | --- | --- |
+| Compile the project | **Build Robot Code** | Before review and after code changes |
+| Run without a robot | **Simulate Robot Code** | Checking commands, state changes, and supported device models |
+| Send code to the roboRIO | **Deploy Robot Code** | The robot is connected and the test lead has approved deployment |
+| Debug on the roboRIO | **Debug Robot Code** | A programmer needs breakpoints on the running robot |
+| Add or update a vendor dependency | **Manage Vendor Libraries** | The project needs a supported CTRE, REV, or other vendor library |
+
+**Deploy Robot Code** builds first, then transfers the program to the roboRIO. Do not switch off the robot during deployment. When deployment finishes, RioLog opens so you can read the robot program's output.
 
 ## Confirm the repository state
 
@@ -34,26 +38,18 @@ Know which branch you are on before editing. Do not discard files you did not cr
 
 ## Vendor dependencies
 
-Robot projects often depend on CTRE, REV, PathPlanner, AdvantageKit, or other libraries. Their JSON declarations belong in `vendordeps`. If classes cannot be resolved, check that the repository contains the expected dependency declaration before reinstalling tools.
+Robot projects often depend on CTRE, REV, PathPlanner, AdvantageKit, or other libraries. Use **WPILib: Manage Vendor Libraries** to install or update them. Their JSON declarations belong in `vendordeps`. If classes cannot be resolved, confirm that the expected declaration is committed before reinstalling tools.
 
-## Useful verification commands
-
-```powershell
-./gradlew.bat test
-./gradlew.bat simulateJava
-./gradlew.bat tasks
-```
-
-`assemble` proves the code compiles. It does not prove CAN IDs, motor direction, sensor offsets, or mechanism safety on the physical robot.
+**Build Robot Code** proves the code compiles. It does not prove CAN IDs, motor direction, sensor offsets, or mechanism safety on the physical robot. **Simulate Robot Code** provides more evidence, but vendor devices may not support simulation completely.
 
 ## Common setup failures
 
 | Symptom | First check |
 | --- | --- |
-| `JAVA_HOME` or Java version error | Launch the WPILib terminal and verify the selected JDK |
+| Java version error | Confirm the project is open in WPILib VS Code rather than another VS Code installation |
 | Missing vendor class | Check `vendordeps` and internet access during dependency resolution |
-| Gradle daemon failure | Stop daemons with `./gradlew.bat --stop`, then rebuild |
+| Build process will not start | Close WPILib VS Code, reopen the project folder, and run **Build Robot Code** again |
 | Project builds for one teammate only | Compare committed wrapper and vendor dependency files |
 | Simulation opens but robot code exits | Read the first exception, not the final shutdown messages |
 
-Record the exact command and first relevant error when asking for help.
+Record the WPILib command you selected and the first relevant error when asking for help.

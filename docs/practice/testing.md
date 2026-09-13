@@ -2,6 +2,8 @@
 
 Test from the safest, cheapest check to the most realistic one: static checks, simulation or hardware-free tests, controlled subsystem tests, full-robot tests, and practice.
 
+Use the WPILib Command Palette in WPILib VS Code for normal team work. **Build Robot Code** is the compile check, **Simulate Robot Code** runs the desktop simulator, and **Deploy Robot Code** sends the program to the roboRIO after the hardware test is approved.
+
 ## Before enabling
 
 - State the expected behavior and stop condition.
@@ -16,11 +18,11 @@ Move to the next level only after the current one produces the expected evidence
 
 | Level | Example | What it proves |
 | --- | --- | --- |
-| Static | Compile, format, inspect configuration | The project is internally consistent |
+| Static | Run **WPILib: Build Robot Code**, format, inspect configuration | The project is internally consistent |
 | Unit | Test a conversion or decision rule | Logic works for known inputs |
-| Simulation | Run subsystem logic without hardware | Commands and state changes interact correctly |
+| Simulation | Run **WPILib: Simulate Robot Code** | Commands and state changes interact correctly |
 | Bench | Move one actuator at limited output | Wiring, signs, sensors, and basic control are correct |
-| Integrated | Run connected robot systems | Boundaries and interlocks work together |
+| Integrated | Run **WPILib: Deploy Robot Code**, then test connected systems | Boundaries and interlocks work together |
 | Practice | Repeat a realistic cycle | Timing, usability, and reliability hold under load |
 
 ## Test behavior at the boundary
