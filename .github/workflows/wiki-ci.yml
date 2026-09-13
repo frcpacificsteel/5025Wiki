@@ -1,0 +1,41 @@
+name: Wiki CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wiki-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build wiki
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Reject unauthorized main pushes
+        if: github.event_name == 'push' && github.actor != 'thepollitosd'
+        run: |
+          echo "Direct pushes to main are reserved for thepollitosd. Open a pull request instead."
+          exit 1
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build VitePress site
+        run: npm run docs:build
