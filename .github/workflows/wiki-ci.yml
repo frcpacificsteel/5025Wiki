@@ -39,3 +39,34 @@ jobs:
 
       - name: Build VitePress site
         run: npm run docs:build
+
+  deploy:
+    name: Deploy production
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.actor == 'thepollitosd'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://wiki-5025.pages.dev
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build VitePress site
+        run: npm run docs:build
+
+      - name: Deploy to Cloudflare Pages
+        run: npx wrangler pages deploy docs/.vitepress/dist --project-name wiki-5025 --branch main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
