@@ -5,6 +5,7 @@ const progress = ref(0)
 const visible = ref(false)
 const top = ref(63)
 let frame = 0
+let navObserver: ResizeObserver | undefined
 
 function updateProgress() {
   frame = 0
@@ -21,7 +22,7 @@ function updateProgress() {
 
   progress.value = available > 0 ? Math.min(window.scrollY / available, 1) : 0
   visible.value = progress.value > 0.035 && progress.value < 0.995
-  top.value = Math.max(0, (localBottom > 0 ? localBottom : mainBottom) - 1)
+  top.value = Math.max(0, localBottom, mainBottom) - 1
 }
 
 function queueUpdate() {
@@ -30,6 +31,10 @@ function queueUpdate() {
 
 onMounted(() => {
   updateProgress()
+  navObserver = new ResizeObserver(queueUpdate)
+  document.querySelectorAll<HTMLElement>('.VPLocalNav, .VPNavBar').forEach((element) => {
+    navObserver?.observe(element)
+  })
   window.addEventListener('scroll', queueUpdate, { passive: true })
   window.addEventListener('resize', queueUpdate, { passive: true })
 })
@@ -37,6 +42,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', queueUpdate)
   window.removeEventListener('resize', queueUpdate)
+  navObserver?.disconnect()
   if (frame) window.cancelAnimationFrame(frame)
 })
 </script>

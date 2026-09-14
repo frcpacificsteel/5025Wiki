@@ -26,17 +26,12 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/frcpacificsteel/5025Wiki', ariaLabel: 'Pacific Steel 5025 Wiki on GitHub' }
     ],
     sidebar: [
-      {
-        text: 'Start here',
-        items: [
-          { text: 'Welcome', link: '/' },
-          { text: 'Robot system map', link: '/systems/' },
-          { text: 'How to use this wiki', link: '/start/how-to-use' },
-          { text: 'New programmer path', link: '/start/new-programmers' },
-          { text: 'Workstation setup', link: '/start/workstation-setup' },
-          { text: 'Report a robot problem', link: '/start/report-a-problem' }
-        ]
-      },
+      { text: 'Welcome', link: '/' },
+      { text: 'Robot system map', link: '/systems/' },
+      { text: 'How to use this wiki', link: '/start/how-to-use' },
+      { text: 'New programmer path', link: '/start/new-programmers' },
+      { text: 'Workstation setup', link: '/start/workstation-setup' },
+      { text: 'Report a robot problem', link: '/start/report-a-problem' },
       {
         text: 'Programming foundations',
         collapsed: true,
