@@ -12,3 +12,5 @@ Each system page starts with a plain-language explanation, then moves into opera
 ## Improve a page
 
 Write for more than one season. If a past robot is useful, label it as an example. Name the vendor, software version, or rule set when the advice depends on one.
+
+The [Wiki essentials](../wiki-essentials/) section explains how to edit or add pages, use Markdown and diagrams, preview changes, and publish through a pull request.
