@@ -92,6 +92,19 @@ export default defineConfig({
           { text: 'Troubleshooting', link: '/reference/troubleshooting' },
           { text: 'Glossary', link: '/reference/glossary' }
         ]
+      },
+      {
+        text: 'Wiki essentials',
+        collapsed: true,
+        items: [
+          { text: 'Contributing to the wiki', link: '/wiki-essentials/' },
+          { text: 'Add or edit a page', link: '/wiki-essentials/pages' },
+          { text: 'Markdown reference', link: '/wiki-essentials/markdown' },
+          { text: 'Diagrams and components', link: '/wiki-essentials/diagrams-and-components' },
+          { text: 'Navigation and assets', link: '/wiki-essentials/navigation-and-assets' },
+          { text: 'Run the wiki locally', link: '/wiki-essentials/local-development' },
+          { text: 'Review and publish', link: '/wiki-essentials/review-and-publish' }
+        ]
       }
     ],
     outline: { level: [2, 3], label: 'On this page' },
