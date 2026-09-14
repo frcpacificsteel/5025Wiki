@@ -1629,6 +1629,18 @@ h4,
   transform-origin: left center;
 }
 
+@media (min-width: 960px) {
+  .reading-progress {
+    left: var(--vp-sidebar-width);
+  }
+}
+
+@media (min-width: 1440px) {
+  .reading-progress {
+    left: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+  }
+}
+
 .back-to-top {
   position: fixed;
   right: 24px;
