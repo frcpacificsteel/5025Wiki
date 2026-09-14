@@ -68,4 +68,3 @@ app.component('NewComponent', NewComponent)
 A component must include semantic HTML, keyboard support, visible focus, light and dark appearance, mobile behavior, reduced-motion handling, and an error state when rendering can fail.
 
 Do not build a one-off component when headings, lists, a table, or a static image communicate the same idea.
-

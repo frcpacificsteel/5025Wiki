@@ -148,4 +148,3 @@ For a Markdown example that contains a code block, wrap the example in four back
 ## Raw HTML and Vue
 
 VitePress accepts HTML and registered Vue components inside Markdown. Use them only when Markdown cannot express the content. Custom behavior adds maintenance cost and must remain keyboard accessible, responsive, and compatible with light and dark modes.
-

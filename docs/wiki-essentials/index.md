@@ -53,4 +53,3 @@ Open a [wiki issue](https://github.com/frcpacificsteel/5025Wiki/issues/new/choos
 7. Merge only after the automated build passes.
 
 Start with [Add or edit a page](./pages) for file-level instructions.
-

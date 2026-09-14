@@ -84,4 +84,3 @@ npm run docs:preview
 | Diagram is blank | Mermaid syntax and the component's `type` value |
 | Dependency errors | Run `npm ci` from the repository root |
 | Local build differs from CI | Use Node.js 22 and commit the lockfile when dependencies change |
-
