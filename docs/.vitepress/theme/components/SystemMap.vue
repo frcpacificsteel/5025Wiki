@@ -486,6 +486,13 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
+    <nav class="system-map__links" aria-label="Open a system guide">
+      <a v-for="system in systems" :key="system.name" :href="system.href">
+        <span>{{ system.name }}</span>
+        <svg aria-hidden="true" viewBox="0 0 16 16"><path d="m6 3 5 5-5 5" /></svg>
+      </a>
+    </nav>
+
     <div
       ref="viewport"
       class="system-map__viewport"
@@ -520,10 +527,6 @@ onBeforeUnmount(() => {
       </div>
       <span class="system-map__hint">Drag the canvas or use the scrollbars. Hold Ctrl while scrolling to zoom.</span>
     </div>
-
-    <nav class="system-map__links" aria-label="Systems shown in the diagram">
-      <a v-for="system in systems" :key="system.name" :href="system.href">{{ system.name }}</a>
-    </nav>
 
     <figcaption>The detailed view mirrors the current template's dependency wiring and package boundaries.</figcaption>
   </figure>
