@@ -13,8 +13,10 @@ Drivers need confirmation from robot motion, controller feedback, lights, sound,
 ## Bind intent, not motors
 
 ```java
-operator.a().onTrue(superstructure.requestScoreHigh());
-operator.b().onTrue(superstructure.requestStow());
+driver.runPrimaryGoal()
+    .onTrue(superstructure.requestGoal(SuperstructureGoal.PRIMARY_ACTION));
+operator.stow()
+    .onTrue(superstructure.requestGoal(SuperstructureGoal.STOW));
 driver.leftBumper().whileTrue(drivetrain.precisionMode());
 ```
 
