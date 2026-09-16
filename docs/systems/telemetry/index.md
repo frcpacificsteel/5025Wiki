@@ -19,7 +19,11 @@ Logger.recordOutput("Drivetrain/MeasuredVxMetersPerSec", measured.vxMetersPerSec
 Logger.recordOutput("Drivetrain/GyroConnected", gyroConnected);
 Logger.recordOutput("Elevator/Goal", goal.name());
 Logger.recordOutput("Elevator/PositionMeters", positionMeters);
+Logger.recordOutput("Superstructure/RequestedGoal", status.requestedGoal().name());
+Logger.recordOutput("Superstructure/Ready", status.ready());
 ```
+
+The current template publishes the same superstructure state through the `Superstructure` NetworkTables table: `requestedGoal`, `ready`, and `detail`. Keep those names stable so dashboards and troubleshooting notes remain trustworthy.
 
 Do not reuse one key for different meanings. Keep naming stable enough to compare logs from separate test sessions.
 

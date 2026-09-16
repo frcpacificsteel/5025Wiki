@@ -61,6 +61,7 @@ export default defineConfig({
         items: [
           { text: 'Drivetrain & swerve', link: '/systems/drivetrain/' },
           { text: 'Autonomous', link: '/systems/autonomous/' },
+          { text: 'Superstructure', link: '/systems/superstructure/' },
           { text: 'Mechanisms', link: '/systems/mechanisms/' },
           { text: 'Vision', link: '/systems/vision/' },
           { text: 'Controls', link: '/systems/controls/' },

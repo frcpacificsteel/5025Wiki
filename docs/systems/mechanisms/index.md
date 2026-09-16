@@ -10,6 +10,8 @@ Document what the mechanism can do, what must be true before it moves, how it de
 
 When mechanisms can collide or compete for power, use named safe states and explicit transition rules. Avoid spreading interlock logic across unrelated buttons and commands.
 
+Use a [superstructure](../superstructure/) when multiple mechanisms must act as one coordinated system. It should receive the high-level goal, sequence each mechanism safely, and publish why a request is blocked.
+
 ## Separate goals from control
 
 The rest of the robot should request a physical goal. The mechanism decides how to reach it within its limits.

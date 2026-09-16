@@ -11,6 +11,7 @@ const systems = [
   { name: 'Controls', href: '/systems/controls/' },
   { name: 'Vision', href: '/systems/vision/' },
   { name: 'Autonomous', href: '/systems/autonomous/' },
+  { name: 'Superstructure', href: '/systems/superstructure/' },
   { name: 'Drivetrain', href: '/systems/drivetrain/' },
   { name: 'Mechanisms', href: '/systems/mechanisms/' },
   { name: 'Telemetry', href: '/systems/telemetry/' },
@@ -18,41 +19,48 @@ const systems = [
 ]
 
 const source = String.raw`flowchart TB
-  Controls["Controls"] --> Decision["Autonomous"]
-  Vision["Vision"] --> Decision
-  Decision --> Drivetrain["Drivetrain"]
-  Decision --> Mechanisms["Mechanisms"]
+  Controls["Controls"] --> Superstructure["Superstructure"]
+  Autonomous["Autonomous"] --> Superstructure
+  Autonomous --> Drivetrain["Drivetrain"]
+  Vision["Vision"] --> Drivetrain
+  Superstructure --> Mechanisms["Mechanisms"]
   Drivetrain --> Telemetry["Telemetry"]
   Mechanisms --> Telemetry
-  Telemetry -. informs the next decision .-> Decision
-  Electrical["Electrical & CAN"] -. power and communication .-> Decision
+  Superstructure --> Telemetry
+  Telemetry -. informs the next plan .-> Autonomous
+  Electrical["Electrical & CAN"] -. power and communication .-> Drivetrain
+  Electrical -.-> Mechanisms
 
   class Controls,Vision input
-  class Decision logic
+  class Autonomous,Superstructure logic
   class Drivetrain,Mechanisms output
   class Telemetry evidence
   class Electrical foundation`
 
 const compactSource = String.raw`flowchart TB
-  Controls["Controls"] --> Decision["Autonomous"]
-  Vision["Vision"] --> Decision
-  Decision --> Drivetrain["Drivetrain"]
-  Decision --> Mechanisms["Mechanisms"]
+  Controls["Controls"] --> Superstructure["Superstructure"]
+  Autonomous["Autonomous"] --> Superstructure
+  Autonomous --> Drivetrain["Drivetrain"]
+  Vision["Vision"] --> Drivetrain
+  Superstructure --> Mechanisms["Mechanisms"]
   Drivetrain --> Telemetry["Telemetry"]
   Mechanisms --> Telemetry
-  Telemetry -.-> Decision
-  Electrical["Electrical & CAN"] -.-> Decision
+  Superstructure --> Telemetry
+  Telemetry -.-> Autonomous
+  Electrical["Electrical & CAN"] -.-> Drivetrain
+  Electrical -.-> Mechanisms
 
   class Controls,Vision input
-  class Decision logic
+  class Autonomous,Superstructure logic
   class Drivetrain,Mechanisms output
   class Telemetry evidence
   class Electrical foundation`
 
 const connections = [
-  ['Controls', 'Decision'], ['Vision', 'Decision'], ['Decision', 'Drivetrain'],
-  ['Decision', 'Mechanisms'], ['Drivetrain', 'Telemetry'], ['Mechanisms', 'Telemetry'],
-  ['Telemetry', 'Decision'], ['Electrical', 'Decision']
+  ['Controls', 'Superstructure'], ['Autonomous', 'Superstructure'], ['Autonomous', 'Drivetrain'],
+  ['Vision', 'Drivetrain'], ['Superstructure', 'Mechanisms'], ['Drivetrain', 'Telemetry'],
+  ['Mechanisms', 'Telemetry'], ['Superstructure', 'Telemetry'], ['Telemetry', 'Autonomous'],
+  ['Electrical', 'Drivetrain'], ['Electrical', 'Mechanisms']
 ]
 
 function wireNodeHover(root: HTMLElement) {
@@ -164,7 +172,7 @@ onBeforeUnmount(() => {
       ref="diagram"
       class="system-map__diagram"
       role="img"
-      aria-label="Controls and vision inform autonomous decisions. Decisions command drivetrain and mechanisms. Telemetry reports results, while electrical power and CAN communication support the robot."
+      aria-label="Controls and autonomous code request superstructure goals. The superstructure coordinates mechanisms, autonomous and vision inform drivetrain behavior, and telemetry reports results. Electrical power and CAN communication support drivetrain and mechanisms."
     ></div>
 
     <p v-if="error" class="system-map__error" role="status">

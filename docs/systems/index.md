@@ -11,7 +11,7 @@ A competition robot runs as a control loop. People and sensors provide informati
 
 ## Read the loop
 
-Read from left to right. Controls and vision provide requests and observations. Autonomous logic coordinates the response. Drivetrain and mechanisms do the physical work. Telemetry reports the result to operators and software.
+Read from left to right. Controls and autonomous code request named goals. The superstructure coordinates those goals with mechanisms, while vision feeds measurements to drivetrain localization. Drivetrain and mechanisms do the physical work. Telemetry reports the result to operators and software.
 
 Power and CAN communication support every stage. A fault there can look like a drivetrain, mechanism, sensor, or software problem, so check that path early.
 
