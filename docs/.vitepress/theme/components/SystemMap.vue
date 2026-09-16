@@ -18,7 +18,7 @@ let panStartScrollLeft = 0
 let panStartScrollTop = 0
 
 const MIN_ZOOM = 0.25
-const MAX_ZOOM = 1.6
+const MAX_ZOOM = 3
 const ZOOM_STEP = 0.1
 
 const canvasWidth = computed(() => mode.value === 'detailed' ? 1540 : 980)
