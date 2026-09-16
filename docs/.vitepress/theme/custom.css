@@ -912,17 +912,24 @@ h4,
 
 .system-map {
   margin: 2rem 0 2.75rem;
-  padding: 1.25rem;
+  padding: 1rem;
+  overflow: hidden;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
+  background: var(--vp-c-bg);
+}
+
+.system-map__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .system-map__intro {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  display: grid;
+  gap: 0.2rem;
 }
 
 .system-map__intro strong {
@@ -932,24 +939,147 @@ h4,
 }
 
 .system-map__intro span {
-  max-width: 34ch;
+  max-width: 46ch;
   color: var(--vp-c-text-2);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   line-height: 1.45;
-  text-align: right;
+}
+
+.system-map__toolbar,
+.system-map__tools,
+.system-map__mode {
+  display: flex;
+  align-items: center;
+}
+
+.system-map__toolbar {
+  flex: none;
+  gap: 0.65rem;
+}
+
+.system-map__mode,
+.system-map__tools {
+  padding: 2px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background: var(--vp-c-bg-soft);
+}
+
+.system-map__mode button,
+.system-map__tools button {
+  border: 0;
+  background: transparent;
+  color: var(--vp-c-text-2);
+  font: 500 0.7rem 'Encode Sans', sans-serif;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ps-magnetic);
+}
+
+.system-map__mode button {
+  min-height: 28px;
+  padding: 0 0.65rem;
+  border-radius: 4px;
+}
+
+.system-map__mode button.is-active {
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  box-shadow: 0 1px 2px rgba(1, 58, 91, 0.1);
+}
+
+.system-map__tools {
+  gap: 1px;
+}
+
+.system-map__tools button {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  place-items: center;
+  border-radius: 4px;
+}
+
+.system-map__tools button:hover:not(:disabled),
+.system-map__mode button:hover {
+  background: var(--vp-c-bg);
+  color: var(--vp-c-brand-1);
+}
+
+.system-map__tools button:active:not(:disabled),
+.system-map__mode button:active {
+  transform: scale(0.96);
+}
+
+.system-map__tools button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.system-map__tools svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+
+.system-map__tools output {
+  width: 38px;
+  color: var(--vp-c-text-2);
+  font: 500 0.64rem 'Encode Sans', sans-serif;
+  text-align: center;
+}
+
+.system-map__viewport {
+  position: relative;
+  min-height: 430px;
+  max-height: min(68vh, 720px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background-color: var(--vp-c-bg-soft);
+  background-image:
+    linear-gradient(var(--vp-c-divider) 1px, transparent 1px),
+    linear-gradient(90deg, var(--vp-c-divider) 1px, transparent 1px);
+  background-size: 24px 24px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-divider) transparent;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.system-map__viewport.is-panning {
+  cursor: grabbing;
+}
+
+.system-map__stage {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+  transition:
+    width 300ms var(--ps-magnetic),
+    height 300ms var(--ps-magnetic);
 }
 
 .system-map__diagram {
-  min-height: 420px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 28px;
   color: var(--vp-c-text-2);
+  transform-origin: top left;
+  transition: transform 240ms var(--ps-magnetic);
+  will-change: transform;
 }
 
 .system-map__diagram svg {
   display: block;
   width: 100% !important;
-  max-width: 100% !important;
+  max-width: none !important;
   height: auto;
-  margin: 0 auto;
 }
 
 .system-map__diagram .node rect,
@@ -963,6 +1093,23 @@ h4,
 .system-map__diagram .nodeLabel,
 .system-map__diagram .edgeLabel {
   font-family: 'Encode Sans', system-ui, sans-serif !important;
+}
+
+.system-map__diagram .nodeLabel {
+  font-size: 0.72rem !important;
+  line-height: 1.35 !important;
+}
+
+.system-map__diagram .cluster rect {
+  stroke-width: 1px !important;
+  rx: 6px;
+  ry: 6px;
+}
+
+.system-map__diagram .cluster-label {
+  font-family: 'Encode Sans Semi Expanded', 'Encode Sans', sans-serif !important;
+  font-size: 0.7rem !important;
+  font-weight: 500 !important;
 }
 
 .system-map__diagram .edgeLabel {
@@ -979,7 +1126,7 @@ h4,
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 0.9rem;
-  margin-top: 0.75rem;
+  margin-top: 0.9rem;
 }
 
 .system-map__links a {
@@ -1002,10 +1149,59 @@ h4,
 }
 
 .system-map figcaption {
-  margin-top: 1rem;
+  margin-top: 0.7rem;
   color: var(--vp-c-text-2);
   font-size: 0.72rem;
   line-height: 1.5;
+}
+
+.system-map__footer,
+.system-map__legend,
+.system-map__legend span {
+  display: flex;
+  align-items: center;
+}
+
+.system-map__footer {
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.system-map__legend {
+  flex-wrap: wrap;
+  gap: 0.45rem 0.9rem;
+  color: var(--vp-c-text-2);
+  font-size: 0.66rem;
+}
+
+.system-map__legend span {
+  gap: 0.35rem;
+}
+
+.system-map__line {
+  width: 20px;
+  height: 0;
+  border-top: 1.5px solid var(--vp-c-text-3);
+}
+
+.system-map__line--dashed {
+  border-top-style: dashed;
+}
+
+.system-map__hint {
+  max-width: 34ch;
+  color: var(--vp-c-text-3);
+  font-size: 0.64rem;
+  line-height: 1.4;
+  text-align: right;
+}
+
+@media (min-width: 960px) {
+  .VPDoc.has-sidebar:not(.has-aside) .content-container,
+  .VPDoc.has-sidebar:not(.has-aside) .main {
+    max-width: 920px;
+  }
 }
 
 .technical-diagram {
@@ -1840,18 +2036,49 @@ h4,
     font-size: 1.9rem;
   }
 
-  .system-map__intro {
-    display: block;
+  .system-map {
+    padding: 12px;
+  }
+
+  .system-map__header {
+    display: grid;
+    gap: 0.8rem;
   }
 
   .system-map__intro span {
-    display: block;
-    margin-top: 0.35rem;
-    text-align: left;
+    max-width: none;
+  }
+
+  .system-map__toolbar {
+    justify-content: space-between;
+    gap: 0.45rem;
+  }
+
+  .system-map__mode button {
+    padding-inline: 0.55rem;
+  }
+
+  .system-map__tools output {
+    display: none;
+  }
+
+  .system-map__viewport {
+    min-height: 360px;
+    max-height: 62vh;
   }
 
   .system-map__diagram {
-    min-height: 360px;
+    padding: 20px;
+  }
+
+  .system-map__footer {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .system-map__hint {
+    max-width: none;
+    text-align: left;
   }
 
   .wiki-assistant-trigger {
@@ -1944,6 +2171,74 @@ h4,
     width: 14px;
     height: 14px;
     fill: currentColor;
+  }
+}
+
+@media print {
+  @page {
+    size: landscape;
+    margin: 10mm;
+  }
+
+  html.printing-system-map body * {
+    visibility: hidden !important;
+  }
+
+  html.printing-system-map .system-map,
+  html.printing-system-map .system-map * {
+    visibility: visible !important;
+  }
+
+  html.printing-system-map .system-map {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    background: #fff;
+  }
+
+  html.printing-system-map .system-map__toolbar,
+  html.printing-system-map .system-map__footer,
+  html.printing-system-map .system-map__links,
+  html.printing-system-map .system-map figcaption {
+    display: none !important;
+  }
+
+  html.printing-system-map .system-map__header {
+    margin-bottom: 4mm;
+  }
+
+  html.printing-system-map .system-map__intro span {
+    color: #46565f;
+  }
+
+  html.printing-system-map .system-map__viewport {
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    border: 0;
+    background: #fff;
+  }
+
+  html.printing-system-map .system-map__stage {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  html.printing-system-map .system-map__diagram {
+    position: static;
+    width: 100% !important;
+    height: auto !important;
+    padding: 0;
+    transform: none !important;
+  }
+
+  html.printing-system-map .system-map__diagram svg {
+    width: 100% !important;
+    height: auto !important;
   }
 }
 

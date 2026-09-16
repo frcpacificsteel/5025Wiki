@@ -1,6 +1,7 @@
 ---
 title: Robot System Map
 description: A durable model for understanding how robot systems interact.
+aside: false
 ---
 
 # Robot System Map
@@ -8,6 +9,8 @@ description: A durable model for understanding how robot systems interact.
 A competition robot runs as a control loop. People and sensors provide information, software chooses an action, hardware carries it out, and telemetry reports the result. The parts change each season; this loop does not.
 
 <SystemMap />
+
+Start with **Broad** to understand the durable system boundaries. Switch to **Detailed** to inspect the current template classes, readiness paths, publishers, and configuration dependencies. The print control fits the entire selected map to a landscape page rather than printing only the visible canvas area.
 
 ## Read the loop
 
