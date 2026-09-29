@@ -46,6 +46,32 @@ export default defineConfig({
         ]
       },
       {
+        text: 'Packages',
+        collapsed: true,
+        items: [
+          { text: 'Overview', link: '/packages/' },
+          {
+            text: '5025UI',
+            collapsed: true,
+            items: [
+              { text: 'Getting started', link: '/packages/5025ui/' },
+              { text: 'Components and logos', link: '/packages/5025ui/components' },
+              { text: 'Styling and themes', link: '/packages/5025ui/styling' }
+            ]
+          },
+          {
+            text: 'QR Transfer',
+            collapsed: true,
+            items: [
+              { text: 'Getting started', link: '/packages/qr-transfer/' },
+              { text: 'Protocol and API', link: '/packages/qr-transfer/protocol' },
+              { text: 'Browser integration', link: '/packages/qr-transfer/integration' },
+              { text: 'Troubleshooting', link: '/packages/qr-transfer/troubleshooting' }
+            ]
+          }
+        ]
+      },
+      {
         text: 'Controls and estimation',
         collapsed: true,
         items: [
