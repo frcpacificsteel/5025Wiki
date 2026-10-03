@@ -18,6 +18,7 @@ export default defineConfig({
     siteTitle: false,
     search: { provider: 'local' },
     nav: [
+      { text: 'Team website', link: 'https://5025.pages.dev/' },
       { text: 'Systems', link: '/systems/' },
       { text: 'New coders', link: '/start/new-programmers' },
       { text: 'Report issue', link: '/start/report-a-problem' }

@@ -16,6 +16,10 @@ function toggleAppearance() {
         <span></span>
       </span>
     </button>
+    <a href="https://5025.pages.dev/" target="_blank" rel="noopener">
+      <span>Team website</span>
+      <svg class="wiki-mobile-actions__globe" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 2a16 16 0 0 0 0 20 16 16 0 0 0 0-20M2 12h20" /></svg>
+    </a>
     <a href="https://github.com/frcpacificsteel/5025Wiki" target="_blank" rel="noopener">
       <span>GitHub repository</span>
       <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3ZM5 5h6v2H7v10h10v-4h2v6H5V5Z" /></svg>
